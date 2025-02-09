@@ -80,4 +80,8 @@ class SandwichMachine:
             self.machine_resources[item] -= amount                                                  ##Remove Ingredients.
         print(str(sandwich_size) + " sandwich is ready. Bon appetit!")
 
+    def add_resources(self, ingredients):
+        for item, amount in ingredients.items():                                                    ##Iterates through the ingredients
+            self.machine_resources[item] += amount                                                  ##Adds the item amount input to the resources
+
 ### Make an instance of SandwichMachine class and write the rest of the codes ###
