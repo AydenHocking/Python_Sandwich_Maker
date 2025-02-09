@@ -85,3 +85,33 @@ class SandwichMachine:
             self.machine_resources[item] += amount                                                  ##Adds the item amount input to the resources
 
 ### Make an instance of SandwichMachine class and write the rest of the codes ###
+
+def main():
+    machine = SandwichMachine(resources)
+    while True:
+        selection = input("What would you like? (small/medium/large/off/report/add): ").lower()     ##Input selections formatted.
+        if selection in recipes:                                                                    ##Checks if the input is small/medium/large.
+            sandwich = recipes[selection]                                                           ##selects sandwich with selection name.
+            if machine.check_resources(sandwich["ingredients"]):                                    ##Runs check_resources for true value.
+                payment = machine.process_coins()                                                   ##Assigns payment to coins from running process_coins.
+                if machine.transaction_result(payment, sandwich["cost"]):                           ##Runs transaction_result for true value.
+                    machine.make_sandwich(selection, sandwich["ingredients"])                       ##Runs make_sandwich.
+        elif selection == "report":                                                                 ##Checks if input is "report".
+            for item, amount in resources.items():                                                  ##Iterates through the resource items.
+                if item == "bread" or item == "ham":                                                ##Checks if item is "bread" or "ham".
+                    print(str(item) + ": " + str(amount) + " slices")                               ##Prints slices.
+                else:
+                    print(str(item) + ": " + str(amount) + " ounces")                               ##Prints ounces(cheese).
+        elif selection == "off":                                                                    ##Checks if input is "off".
+            print("Turning off the sandwich machine.")
+            break                                                                                   ##End program with code 0.
+        elif selection == "add":                                                                    ##Checks if input is "add". Added to maintain steady resource amount without program re-execution.
+            add_bread = int(input("How many bread slices would you like to add? "))                 ##Input bread to add.
+            add_ham = int(input("How many ham slices would you like to add? "))                     ##Input ham to add.
+            add_cheese = int(input("How many cheese ounces would you like to add? "))               ##Input cheese to add.
+            machine.add_resources({"bread": add_bread, "ham": add_ham, "cheese": add_cheese})       ##Runs add_resources with amounts.
+        else:
+            print("Sorry, that's not a valid option.")                                              ##Error check.
+
+if __name__ == "__main__":
+    main()
