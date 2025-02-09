@@ -65,6 +65,13 @@ class SandwichMachine:
     def transaction_result(self, coins, cost):
         """Return True when the payment is accepted, or False if money is insufficient.
            Hint: use the output of process_coins() function for cost input"""
+        if cost > coins:                                                                            ##Checks if the user paid enough for sandwich cost.
+            print("Sorry that's not enough money. Money refunded.")
+            return False
+        else:
+            change = coins - cost                                                                   ##Determine change.
+            print("Here is $%.2f in change." % change)                                              ##Formats change to 2 decimal places.
+            return True
 
     def make_sandwich(self, sandwich_size, order_ingredients):
         """Deduct the required ingredients from the resources.
